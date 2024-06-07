@@ -21,6 +21,10 @@ public class Ejercicio17 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        final int min=-100;
+        final int max=101;
+        
+        
         Random rand = new Random();
         
         
@@ -30,18 +34,12 @@ public class Ejercicio17 {
         int[] matrixRand50Pos = new int[50];
         
         for(int i=0;i<50;i++){
-            matrixRand50Pos[i] = rand.nextInt();
-            if (matrixRand50Pos[i]>0) {
-                positives++;
-            }
-            else if (matrixRand50Pos[i]<0) {
-                negatives++;
-            }
-            else {
-                zeros++;
-            }
+            matrixRand50Pos[i] = rand.nextInt(min, max); //se agregan estas dos constantes para dar un rango y aumentar la posibilidad de tener ceros...
+            if (matrixRand50Pos[i]>0) positives++;
+            else if (matrixRand50Pos[i]<0) negatives++;
+            else zeros++;
             
-            System.out.print("|\t"+matrixRand50Pos[i] +"\t");
+            System.out.print("|\t"+matrixRand50Pos[i] +"\t");//utilizo el mismo for para ir imprimiendo la muestra.
             
             }
         System.out.println("|");
