@@ -29,6 +29,7 @@ public class Main {
         Scanner read = new Scanner(System.in);
         
         String menu;
+        double money;
         
         Moneybox piggyBank = new Moneybox();
         System.out.println("Gracias por usar nuestra alcancía digital!");
@@ -44,6 +45,7 @@ public class Main {
             System.out.println("Escriba Salir (o presione 0) para salir de su alcancía Digital: ");
             System.out.print("Escoja su opción: ");
             menu = read.nextLine();
+            
             while(!(menu.equalsIgnoreCase("saldo") || menu.equalsIgnoreCase("1") || menu.equalsIgnoreCase("Deposito") || menu.equalsIgnoreCase("2") || 
                     menu.equalsIgnoreCase("Ndepositos") || menu.equalsIgnoreCase("3") || menu.equalsIgnoreCase("Depositos") || menu.equalsIgnoreCase("4")
                     || menu.equalsIgnoreCase("Nretiros") || menu.equalsIgnoreCase("5") || menu.equalsIgnoreCase("Retiros") || menu.equalsIgnoreCase("6")
@@ -52,7 +54,41 @@ public class Main {
                 System.out.print("Escoja su opción: ");
                 menu = read.nextLine();
             }
-        }while (!(menu.equalsIgnoreCase("salir")));
+            
+            menu=menu.toLowerCase();
+            switch (menu){
+                case "1" : case "saldo":
+                    System.out.println("Su saldo es: "+piggyBank.balance());
+                    break;
+                case "2": case "deposito":
+                    System.out.print("Digite la cantidad a depositar: ");
+                    money = read.nextDouble();
+                    if (money<0) System.out.println("Valor incorrecto - No puedes realizar un deposito negativo.\n Operación Cancelada.");
+                    else piggyBank.moneyDeposit(money);
+                    break;
+                case "3": case "ndepositos":
+                    System.out.println("Usted ha realizado "+piggyBank.deposits()+" depositos.");
+                    break;
+                case "4": case "depositos":
+                    piggyBank.depositslist();
+                    break;
+                case "5": case "nretiros":
+                    System.out.println("Usted ha realizado "+piggyBank.withdraws());
+                    break;
+                case "6": case "retiros":
+                    piggyBank.withdrawslist();
+                    break;
+                case "7": case "retiro": 
+                    System.out.print("Digite la cantidad a retirar: ");
+                    money = read.nextDouble();
+                    if (money<0) System.out.println("Valor incorrecto - No puedes realizar un retiro negativo.\n Operación Cancelada.");
+                    else piggyBank.moneyWithdrow(money);
+                    break;
+                default:
+                    System.out.println("Gracias por tu visita.\nEsperamos muelvas a usar nuestros servicios pronto!");
+                    break;
+            }
+        }while (!((menu.equalsIgnoreCase("salir"))||(menu.equalsIgnoreCase("0"))));
         
         
         
